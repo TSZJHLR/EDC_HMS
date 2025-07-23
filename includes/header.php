@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="assets/css/components.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/entry.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/terms.css">
+    <link rel="stylesheet" href="assets/css/how-it-works.css">
+    <link rel="stylesheet" href="assets/css/privacy.css">
 </head>
 
 <body<?php echo isset($bodyClass) ? ' class="' . $bodyClass . '"' : ''; ?>

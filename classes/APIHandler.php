@@ -44,11 +44,14 @@ class APIHandler {
         
         if($this->validateAPIData($data)) {
             $this->setDataEntryFromAPI($data);
-            
-            if($this->dataEntry->create()) {
-                $this->sendResponse(['message' => 'Entry created successfully'], 201);
-            } else {
-                $this->sendResponse(['message' => 'Entry not created'], 400);
+            try {
+                if($this->dataEntry->create()) {
+                    $this->sendResponse(['message' => 'Entry created successfully'], 201);
+                } else {
+                    $this->sendResponse(['message' => 'Entry not created'], 400);
+                }
+            } catch (Exception $e) {
+                $this->sendResponse(['message' => $e->getMessage()], 400);
             }
         } else {
             $this->sendResponse(['message' => 'Missing or invalid required fields'], 400);

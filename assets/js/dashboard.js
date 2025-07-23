@@ -46,10 +46,16 @@ function resetForm() {
 }
 
 // CRUD operations with AJAX
+let isSubmitting = false;
+
 function editEntry(id) {
+    if (isSubmitting) return;
+    
+    isSubmitting = true;
     fetch(`api/data_entries.php?id=${id}`)
         .then(response => response.json())
         .then(data => {
+            isSubmitting = false;
             if (data && data.id) {
                 fillEditForm(data);
                 showAddForm();
@@ -58,6 +64,7 @@ function editEntry(id) {
             }
         })
         .catch(error => {
+            isSubmitting = false;
             console.error('Error:', error);
             alert('Error loading entry data');
         });
@@ -78,20 +85,32 @@ function fillEditForm(data) {
 }
 
 function deleteEntry(id) {
+    if (isSubmitting) return;
+    
     if (confirm('Are you sure you want to delete this entry?')) {
-        const formData = new FormData();
-        formData.append('action', 'delete');
-        formData.append('id', id);
-        
-        fetch(window.location.href, {
-            method: 'POST',
-            body: formData
+        isSubmitting = true;
+        fetch('api/data_entries.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id })
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            location.reload(); // Simple reload for now
+            isSubmitting = false;
+            if (data.message === 'Entry deleted successfully') {
+                const row = document.querySelector(`tr[data-id="${id}"]`);
+                if (row) {
+                    row.remove();
+                }
+                alert('Entry deleted successfully');
+            } else {
+                alert('Error deleting entry');
+            }
         })
         .catch(error => {
+            isSubmitting = false;
             console.error('Error:', error);
             alert('Error deleting entry');
         });

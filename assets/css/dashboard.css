@@ -168,6 +168,7 @@
     align-items: center;
     gap: 1rem;
     margin-left: auto;
+    color: white;
 }
 
 .user-name {

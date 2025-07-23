@@ -1,0 +1,102 @@
+/* Privacy Page Styles */
+
+/* Basic Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.hero-section h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section .lead {
+    font-size: 1.125rem;
+    color: #e2e8f0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Privacy Content */
+.privacy-content {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.privacy-content .section {
+    margin-bottom: 3rem;
+}
+
+.privacy-content .section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.privacy-content .section-number {
+    background: #f3f4f6;
+    color: #4b5563;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+}
+
+.privacy-content p {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.privacy-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.privacy-content li {
+    margin-bottom: 0.75rem;
+}
+
+/* Last Updated */
+.last-updated {
+    background: #f3f4f6;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+}
+
+/* Info Box */
+.info-box {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.info-box h3 {
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+.info-box p {
+    color: #4b5563;
+}
+
+/* Links */
+a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

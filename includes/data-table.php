@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 <?php foreach($entries as $entry): ?>
-                <tr>
+                <tr data-id="<?php echo $entry['id']; ?>">
                     <td><?php echo htmlspecialchars($entry['participant_id']); ?></td>
                     <td><?php echo htmlspecialchars($entry['first_name'] . ' ' . $entry['last_name']); ?></td>
                     <td><?php echo htmlspecialchars($entry['email']); ?></td>

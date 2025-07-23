@@ -1,51 +1,67 @@
 # Electronic Data Capture (EDC) System
 
-A secure, user-friendly PHP CRUD application for electronic data capture with modern web technologies.
+A secure, user-friendly PHP CRUD application for electronic data capture with modern web technologies and enhanced security features.
 
 ## Features
 
 - **Authentication**: Secure login and registration with session management
-- **Data Security**: Password hashing with bcrypt, prepared statements
+- **Data Security**: Password hashing with bcrypt, prepared statements, and participant ID validation
 - **Modern UI**: Responsive design with Font Awesome icons
-- **AJAX Integration**: Real-time form validation and submission
-- **Form Validation**: Dual-layer validation (client + server)
-- **RESTful API**: JSON endpoints for all CRUD operations
-- **OOP Architecture**: Modular class structure
-- **Database Security**: PDO prepared statements, foreign key constraints
+- **AJAX Integration**: Real-time form validation and submission with UI updates
+- **Form Validation**: Dual-layer validation (client + server) with participant ID uniqueness check
+- **RESTful API**: JSON endpoints for all CRUD operations with proper error handling
+- **OOP Architecture**: Modular class structure with improved error handling
+- **Database Security**: PDO prepared statements, foreign key constraints, and transaction support
 
 ## Installation
 
 1. **Setup MAMP/XAMPP**
+
    - Start Apache and MySQL services
    - Create a new database named `electronic_data_capture`
-
 2. **Database Setup**
+
    ```sql
    -- Create users table
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    full_name VARCHAR(100),
-    role ENUM('admin', 'user') DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+   CREATE TABLE IF NOT EXISTS users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      username VARCHAR(50) NOT NULL UNIQUE,
+      email VARCHAR(100) NOT NULL UNIQUE,
+      password_hash VARCHAR(255) NOT NULL,
+      full_name VARCHAR(100),
+      role ENUM('admin', 'user') DEFAULT 'user',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+   );
+   
+    -- Create sessions table for session management
+    CREATE TABLE IF NOT EXISTS sessions (
+      id VARCHAR(32) PRIMARY KEY,
+      user_id INT NOT NULL,
+      ip_address VARCHAR(45),
+      user_agent TEXT,
+      last_activity TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+   );
 
--- Create sessions table for session management
-CREATE TABLE IF NOT EXISTS sessions (
-    id VARCHAR(32) PRIMARY KEY,
-    user_id INT NOT NULL,
-    ip_address VARCHAR(45),
-    user_agent TEXT,
-    last_activity TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+   -- Create data entries table
+   CREATE TABLE IF NOT EXISTS data_entries (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      participant_id VARCHAR(50) NOT NULL UNIQUE,
+      first_name VARCHAR(100) NOT NULL,
+      last_name VARCHAR(100) NOT NULL,
+      email VARCHAR(100) NOT NULL,
+      date_of_birth DATE,
+      gender ENUM('male', 'female', 'other'),
+      notes TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+   );
    ```
 
 3. **File Structure**
-   ```
+```
+
    edc-system/
    ├── api/
    │   ├── auth.php
@@ -64,7 +80,6 @@ CREATE TABLE IF NOT EXISTS sessions (
    │       ├── api.js
    │       ├── auth.js
    │       ├── dashboard.js
-   │       ├── daseboard-main.js
    │       ├── forms.js
    │       ├── landing.js
    │       ├── main.js
@@ -96,7 +111,8 @@ CREATE TABLE IF NOT EXISTS sessions (
    ├── dashboard.php
    ├── index.php
    └── README.md
-   ```
+
+```
 
 4. **Configuration**
    - Update database credentials in `config/Database.php`
@@ -105,16 +121,16 @@ CREATE TABLE IF NOT EXISTS sessions (
 
 ## Usage
 
-1. **Landing Page**: Navigate to `index.php`
+1. **Landing Page**: Navigate to `index.php` (redirects to login if not authenticated)
 2. **Authentication**: Login/Register at `entry.php`
-3. **Dashboard**: Full CRUD operations at `dashboard.php`
+3. **Dashboard**: Full CRUD operations at `dashboard.php` with real-time updates
 4. **API**: RESTful endpoints at `api/`
 
 ## API Endpoints
 
 - `GET /api/data_entries.php` - Get all entries
 - `GET /api/data_entries.php?id={id}` - Get single entry
-- `POST /api/data_entries.php` - Create new entry
+- `POST /api/data_entries.php` - Create new entry (with participant ID validation)
 - `PUT /api/data_entries.php` - Update entry
 - `DELETE /api/data_entries.php` - Delete entry
 - `POST /api/logout.php` - Logout
@@ -124,8 +140,10 @@ CREATE TABLE IF NOT EXISTS sessions (
 - **Data Encryption**: Sensitive fields encrypted with AES-128-CBC
 - **SQL Injection Protection**: PDO prepared statements
 - **XSS Prevention**: HTML escaping and sanitization
-- **Input Validation**: Client and server-side validation
-- **CSRF Protection**: Form token validation (can be enhanced)
+- **Input Validation**: Client and server-side validation with participant ID uniqueness check
+- **CSRF Protection**: Form token validation
+- **Authentication**: Session-based login required for dashboard access
+- **Error Handling**: Proper error messages for duplicate entries and validation failures
 
 ## Technologies Used
 
@@ -134,6 +152,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 - **Security**: OpenSSL encryption, prepared statements
 - **Architecture**: Object-Oriented Programming (OOP)
 - **API**: RESTful JSON API
+- **UI Framework**: Custom CSS with Font Awesome icons
 
 ## Browser Compatibility
 
@@ -145,3 +164,4 @@ CREATE TABLE IF NOT EXISTS sessions (
 ## License
 
 This project is for educational purposes. Feel free to modify and use as needed.
+```

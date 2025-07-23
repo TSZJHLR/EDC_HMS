@@ -1,0 +1,65 @@
+/* Terms Page Styles */
+.terms-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.terms-content h1 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.terms-content h2 {
+    color: var(--primary);
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+}
+
+.terms-content h2 .section-number {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+}
+
+.terms-content h3 {
+    color: var(--primary);
+    margin: 1.5rem 0 0.75rem;
+    font-size: 1.25rem;
+}
+
+.terms-content p {
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+.terms-content ul, .terms-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.terms-content li {
+    margin-bottom: 0.75rem;
+}
+
+.terms-content a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.terms-content a:hover {
+    text-decoration: underline;
+}
+
+.terms-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
