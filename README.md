@@ -2,6 +2,8 @@
 
 A secure, user-friendly PHP CRUD application for electronic data capture with modern web technologies and enhanced security features.
 
+[documentation](DOCUMENTATION.md)
+
 ## Features
 
 - **Authentication**: Secure login and registration with session management
