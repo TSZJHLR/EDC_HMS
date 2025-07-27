@@ -1,3 +1,27 @@
+/* Buttons */
+.btn-auth, .btn-logout {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--white);
+    border: none;
+    background: var(--primary-color);
+}
+
+.btn-auth:hover, .btn-logout:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-logout {
+    margin-left: 1rem;
+}
+
 /* Alerts */
 .alert {
     padding: 1rem;
