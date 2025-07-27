@@ -15,10 +15,10 @@ session_start();
         <div class="auth-menu">
             <?php if (isset($_SESSION['user_id'])): ?>
                 <span class="user-name">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                <button onclick="location.href='api/logout.php'" class="btn-logout">Logout</button>
+                <button onclick="window.location.href='api/logout.php'" class="btn-logout">Logout</button>
             <?php else: ?>
-                <button onclick="location.href='entry.php'" class="btn-auth">Login/Register</button>
+                <button onclick="window.location.href='entry.php'" class="btn-auth">Login/Register</button>
             <?php endif; ?>
         </div>
     </div>
-</nav>s
+</nav>
